@@ -2,6 +2,9 @@
 """
 Created on Jan 25 2016
 
+Project Euler Problem 002
+Find the sum of all Fibonnaci numbers which are less than maxnumber and even
+
 @author: sarahv
 """
 

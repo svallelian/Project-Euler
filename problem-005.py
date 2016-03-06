@@ -5,7 +5,7 @@ Created on Mar 6 2016
 Project Euler Problem 005
 Find the smallest positive number that is evenly divisible by all of the numbers from 1 to 20.
 
-@author: sarahv
+@author: sarahv 
 """
 
 n=20
@@ -28,13 +28,24 @@ def primefactors(n):
     return factors
     
 def factorizeall(n):
-    """ Returns the list of factors of all natural numbers <= n, where n > 3 """
+    """ Returns the product and list of factors of all natural numbers <= n, where n > 3 """
     y=[]
+    prod=1
     for x in range(1,n+1):
         if x==1 or x==2 or x==3:
-            y.append([x])
+            y.append(x)
+            prod*=x
         else:
-            y.append(primefactors(x))
-    return y
+            fac=primefactors(x)
+            remaining=y[:]
+            for k in range(0,len(fac)):
+                """ Go through each factor of the current digit and save any extras """
+                if fac[k] in remaining:
+                    remaining.remove(fac[k])
+                else:
+                    y.append(fac[k])
+                    prod*=fac[k]
+            
+    return y, prod
        
-output=factorizeall(n)
+factors, prod=factorizeall(n)

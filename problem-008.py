@@ -9,6 +9,10 @@ What is the value of this product?
 @author: sarahv
 """
 
+import numpy as np 
+""" np.prod requires floats NOT ints!"""
+""" To use it, replace line 50 with m=np.prod(p) """
+
 M=13;
 N=('73167176531330624919225119674426574742355349194934'+
 '96983520312774506326239578318016984801869478851843'+
@@ -31,6 +35,23 @@ N=('73167176531330624919225119674426574742355349194934'+
 '05886116467109405077541002256983155200055935729725'+
 '71636269561882670428252483600823257530420752963450');
 
+def prod(p):
+    """ Given a list of numbers, multiply them together """
+    pr=1;
+    for x in p:
+        pr*=x;
+    return pr
+
 def adjlargestprod(N,M):
     """ Given a string N of digits and a length M of adjacent digits """
-    
+    maxprod=0;
+    k=len(N);
+    for x in range(0,k-M):
+        p=[float(s) for s in list(N[x:x+M])];
+        m=prod(p);
+        if m > maxprod:
+            maxprod=m;
+            digs=N[x:x+M];
+    return digs, maxprod
+
+digs, maxprod = adjlargestprod(N,M);
